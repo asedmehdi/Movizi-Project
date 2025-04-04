@@ -37,7 +37,7 @@
 
 </div>
 
-## 🎯 About The Projecct
+## 🎯 About The Project
 
 Movizi is a full-stack movie database and community platform inspired by IMDb + Netflix, built for film enthusiasts, critics, and casual viewers. Browse, rate, review movies with a clean, modern interface.
 
