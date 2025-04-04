@@ -91,8 +91,4 @@ docker compose -f docker-compose.dev.yml up -d
 Soon....
 ```
 
-
-## LICEN
-
-
 📌 Live Demo: [Coming Soon] | Contribute: Open for PRs!
