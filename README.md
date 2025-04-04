@@ -72,7 +72,7 @@ The name merges "Movie" with a nod to the founders surname ("vi" from "Mousavi",
 
 1- Clone the project
 ```
-git clone https://github.com/sourcestream-v01/Expo-Backend-Django.git
+git clone https://github.com/asedmehdi/Movizi-Project.git
 ```
 2- spin off docker compose (Optional)
 ```
