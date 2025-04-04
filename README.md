@@ -1,8 +1,3 @@
-# Movizi-Project
-Movizi (Simple Movie Database &amp; Discovery Platform) 
-
-
-
 <div align="center">
 <img src="./img/movie.png" alt="movie" width="200" height="auto" />
 <h1>Movizi</h1>
