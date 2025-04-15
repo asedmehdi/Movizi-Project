@@ -112,7 +112,7 @@
 
 .container{
 background-color: #151515;
-height: calc(100 vh - 50px);
+min-height: calc(100 vh - 50px);
 color: white;
 
 }
@@ -144,4 +144,76 @@ border-radius: 20px;
 border: none;
 outline : none;
 font-weight: bold;
+}
+
+.movie-list-container{
+
+padding: 20px;
+
+}
+
+.movie-list{
+    display: flex;
+    align-items: center;
+    height: 300px;
+}
+
+.movie-list-item{
+    margin-right: 30px;
+}
+
+.movie-list-item:hover .movie-list-item-img{
+    transform: scale(1.2);
+    margin: 0 30px;
+    opacity: 0.5;
+}
+
+
+.movie-list-item:hover .movie-list-item-title
+.movie-list-item:hover .movie-list-item-desc
+.movie-list-item:hover .movie-list-item-button{
+    opacity: 1;
+}
+
+
+.movie-list-item-img{
+    transition: all 1s ease-in-out;
+    width: 270px;
+    height: 200px;
+    object-fit: cover;
+
+}
+
+.movie-list-item-title{
+    background-color: 333;
+    padding: 0 10px;
+    font-size: 32px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
+
+.movie-list-item-desc{
+    background-color: 333;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    width: 230px;
+}
+
+.movie-list-item-button{
+    padding: 10px;
+    background-color: #4dbf00;
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    bottom: 20px;
+    left: 50px;
 }
