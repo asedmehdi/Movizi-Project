@@ -2,13 +2,14 @@
     margin: 0;
 }
 
-.navbar{
+
+.navbar-1{
     width: 100%;
     height: 0 50px;
     background-color: black;
 }
 
-.navbar-container{
+.navbar-container-1{
     display: flex;
     align-items: center;
     padding: 0 50px;
@@ -17,26 +18,26 @@
     font-family: "Sen", sans-serif;
 }
 
-.logo-container{
+.logo-container-1{
     flex: 1;
 }
 
-.logo{
+.logo-1{
     font-family: "Sen", sans-serif;
     font-size: 30px;
     color: #4dbf00;
 }
 
-.menu-container{
+.menu-container-1{
     flex: 6;
 }
 
-.menu-list{
+.menu-list-1{
     display: flex;
     list-style: none;
 }
 
-.menu-list-item{
+.menu-list-item-1{
     margin: 30px;
 
 }
@@ -56,14 +57,14 @@
     margin: 0 20px;
 }
 
-.profile-picture{
+.profile-picture-1{
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.toggle{
+.toggle-1{
     width: 40px;
     height: 20px;
     background-color: white;
@@ -78,7 +79,7 @@
     color: goldenrod;
 }
 
-.toggle-ball{
+.toggle-ball-1{
     width: 18px;
     height: 18px;
     background-color: black;
@@ -88,7 +89,7 @@
     cursor: pointer;
 }
 
-.sidebar{
+.sidebar-1{
     width: 50px;
     height: 100%;
     background-color: black;
@@ -103,14 +104,14 @@
 
 }
 
-.left-menu-icon{
+.left-menu-icon-1{
 
     color: white;
     font-size: 20px;
     margin-bottom: 40px;
 }
 
-.container{
+.container-1{
 background-color: #151515;
 min-height: calc(100 vh - 50px);
 color: white;
@@ -213,7 +214,7 @@ padding: 20px;
     outline: none;
     border: none;
     cursor: pointer;
-
+    align-items: center;
     bottom: 20px;
-    left: 50px;
+    /* left: 50px; */
 }

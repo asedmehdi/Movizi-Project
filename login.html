@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <div class="navbar-1">
+        <div class="navbar-container-1">
+            <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
+            <div class="menu-container-1">
+                <ul class="menu-list-1">
+                    <li class="menu-list-item-1 active">Home</li>
+                    <li class="menu-list-item-1">Movies</li>
+                    <li class="menu-list-item-1">Series</li>
+                    <li class="menu-list-item-1">Popular</li>
+                    <li class="menu-list-item-1">Trends</li>
+                </ul>
+            </div>
+            <div class="profile-container">
+                <a href="./login.html">
+                    <button type="button" class="btn btn-primary btn-sm">Login</button>
+                  </a>
+                  <a href="./register.html">
+                    <button type="button" class="btn btn-secondary btn-sm">Register</button>
+                  </a>
+                <div class="toggle-1">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-1">
+        <i class="left-menu-icon-1 fa-solid fa-house"></i>    
+        <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
+        <i class="left-menu-icon-1 fa-solid fa-bookmark"></i>
+        <i class="left-menu-icon-1 fa-solid fa-cart-shopping"></i>
+        <i class="left-menu-icon-1 fa-solid fa-users"></i>
+        <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
+        <i class="left-menu-icon-1 fa-solid fa-tv"></i>
+    </div>
+
+    <!-- Bootstrap Login Form -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">Login to Movizi</h2>
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <div class="text-center mt-3">
+                                <a href="./forget.html" class="text-decoration-none">Forgot password?</a>
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <p class="mb-0">Don't have an account? <a href="./login.html" class="text-decoration-none">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

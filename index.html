@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/style.css">
     <title>Movie Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/bootstrap.main.css">
+        <link rel="stylesheet" href="./style/style.css">
 </head>
-<body>
-    <div class="navbar">
-        <div class="navbar-container">
-            <div class="logo-container"><h1 class="logo">flakes</h1></div>
-            <div class="menu-container">
-                <ul class="menu-list">
-                    <li class="menu-list-item active">Home</li>
-                    <li class="menu-list-item ">Movies</li>
-                    <li class="menu-list-item">Series</li>
-                    <li class="menu-list-item">Popular</li>
-                    <li class="menu-list-item">Trends</li>
-                </ul>
-            </div>
-            <div class="profile-container">
-                <img src="./img/profile.jpg" alt="user profile" class="profile-picture">
-                <div class="profile-text-container">
-                    <span class="profile-text">Profile</span>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="toggle">
-                    <i class="fas fa-moon toggle-icon"></i>
-                    <i class="fas fa-sun toggle-icon"></i>
-                    <div class="toggle-ball"></div>
-                </div>
+<div class="navbar-1">
+    <div class="navbar-container-1">
+        <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
+        <div class="menu-container-1">
+            <ul class="menu-list-1">
+                <li class="menu-list-item-1">Home</li>
+                <li class="menu-list-item-1">Movies</li>
+                <li class="menu-list-item-1">Series</li>
+                <li class="menu-list-item-1">Popular</li>
+                <li class="menu-list-item-1">Trends</li>
+                <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
+                <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
+            </ul>
+        </div>
+        <div class="profile-container">
+            <a href="./login.html">
+                <button type="button" class="btn btn-primary btn-sm">Login</button>
+              </a>
+              <a href="./register.html">
+                <button type="button" class="btn btn-secondary btn-sm">Register</button>
+              </a>
+            <div class="toggle-1">
+                <i class="fas fa-moon toggle-icon"></i>
+                <i class="fas fa-sun toggle-icon"></i>
+                <div class="toggle-ball-1"></div>
             </div>
         </div>
     </div>
-    <div class="sidebar">
+</div>
+    <div class="sidebar-1">
 
-        <i class="left-menu-icon fa-solid fa-house"></i>    
-        <i class="left-menu-icon fa-solid fa-magnifying-glass"></i>
-        <i class="left-menu-icon fa-solid fa-bookmark"></i>
-        <i class="left-menu-icon fa-solid fa-cart-shopping"></i>
-        <i class="left-menu-icon fa-solid fa-users"></i>
-        <i class="left-menu-icon fa-solid fa-hourglass-half"></i>
-        <i class="left-menu-icon fa-solid fa-tv"></i>
+        <i class="left-menu-icon-1 fa-solid fa-house"></i>    
+        <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
+        <i class="left-menu-icon-1 fa-solid fa-bookmark"></i>
+        <i class="left-menu-icon-1 fa-solid fa-cart-shopping"></i>
+        <i class="left-menu-icon-1 fa-solid fa-users"></i>
+        <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
+        <i class="left-menu-icon-1 fa-solid fa-tv"></i>
     
     </div>
 
-    <div class="container">
+    <div class="container-1">
         <div class="content-container">
-            <div class="featured-content"
-            
-                style="background : linear-gradient(to bottom , rgba(0,0,0,0),#151515), url('img/chain.png');"
-
-            >
+            <div class="featured-content" style="background : linear-gradient(to bottom , rgba(0,0,0,0),#151515), url('img/chain.png');">
 
             <img class="featured-title" src="img/movie.png" alt="">
             <p class="featured-desc">
                 seyed amir musavi                 seyed amir musavi
 
-            </p>
+            </p><br>
 
             <button class="featured-button">
                 WATCH
@@ -73,31 +72,34 @@
             <div class="movie-list-containe">
 
                 <h1 class="movie-list-titl">
-                    NEW RELEASES
+                    Top Films
                 </h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
                         
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/interstellar.jpg" alt="">
-                            <span class="movie-list-item-title">HER</span>
-                            <p class="movie-list-item-desc">interstellar erth destroying . . .</p>
+                            <!-- <span class="movie-list-item-title">HER</span> -->
+                            <!-- <p class="movie-list-item-desc">interstellar erth destroying . . .</p> -->
+                             <br>
                             <button class="movie-list-item-button">WATCH</button>
 
                         </div>
 
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/matrix.jpg" alt="">
-                            <span class="movie-list-item-title">HER</span>
-                            <p class="movie-list-item-desc">matrix . real life & fake life . . .</p>
+                            <!-- <span class="movie-list-item-title">HER</span> -->
+                            <!-- <p class="movie-list-item-desc">matrix . real life & fake life . . .</p> -->
+                            <br>
                             <button class="movie-list-item-button">WATCH</button>
 
                         </div>
 
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/inception.jpg" alt="">
-                            <span class="movie-list-item-title">HER</span>
-                            <p class="movie-list-item-desc">inception . dreams . . .</p>
+                            <!-- <span class="movie-list-item-title">HER</span> -->
+                            <!-- <p class="movie-list-item-desc">inception . dreams . . .</p> -->
+                            <br>
                             <button class="movie-list-item-button">WATCH</button>
 
                         </div>
