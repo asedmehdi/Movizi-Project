@@ -17,11 +17,14 @@
             <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
             <div class="menu-container-1">
                 <ul class="menu-list-1">
-                    <li class="menu-list-item-1 active">Home</li>
+                    <li class="menu-list-item-1">Home</li>
                     <li class="menu-list-item-1">Movies</li>
                     <li class="menu-list-item-1">Series</li>
                     <li class="menu-list-item-1">Popular</li>
                     <li class="menu-list-item-1">Trends</li>
+                    <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
+                    <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
+                    <a href="./blog.html"><li class="menu-list-item-1 active">Blog</li></a>
                 </ul>
             </div>
             <div class="profile-container">
@@ -48,60 +51,109 @@
         <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
         <i class="left-menu-icon-1 fa-solid fa-tv"></i>
     </div>
+    
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+            <!-- Search section -->
+            <div class="col-md-3">
+                <div class="card p-4">
+                    <h5 class="card-title">Search Movies</h5>
+                    <form id="searchForm">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Search by title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            <select class="form-select" id="genre">
+                                <option value="" selected>Choose genre</option>
+                                <option value="action">Action</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="drama">Drama</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            <select class="form-select" id="genre">
+                                <option value="" selected>Choose genre</option>
+                                <option value="action">Action</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="drama">Drama</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            <select class="form-select" id="genre">
+                                <option value="" selected>Choose genre</option>
+                                <option value="action">Action</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="drama">Drama</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                    </form>
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+            <!-- Movie cards -->
+            <div class="col-md-9">
+                <div class="d-flex flex-wrap gap-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
+                    <!-- Duplicate cards for demonstration -->
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <!-- Add more cards as needed -->
                 </div>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            
         </div>
     </div>
+    
     </body>
 </html>
