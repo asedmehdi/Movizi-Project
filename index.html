@@ -1,49 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
+    <title>Movizi - IMDb Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./style/bootstrap.main.css">
-        <link rel="stylesheet" href="./style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-dark: #121212;
+            --imdb-light-dark: #2c2c2c;
+            --imdb-gray: #757575;
+            --imdb-light-gray: #e6e6e6;
+            --imdb-white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--imdb-white);
+            color: #000;
+        }
+        
+        /* Navbar */
+        .navbar-1 {
+            background-color: var(--imdb-white);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--imdb-light-gray);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-container-1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-1 {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+        
+        .menu-container-1 {
+            flex-grow: 1;
+        }
+        
+        .menu-list-1 {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu-list-item-1 {
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            color: #000;
+        }
+        
+        .menu-list-item-1:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--imdb-yellow);
+            color: #000;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--imdb-gray);
+            color: #000;
+        }
+        
+        .toggle-1 {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--imdb-light-gray);
+            border-radius: 10px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        .toggle-icon {
+            position: absolute;
+            font-size: 12px;
+        }
+        
+        .fa-moon {
+            left: 5px;
+            top: 4px;
+        }
+        
+        .fa-sun {
+            right: 5px;
+            top: 4px;
+        }
+        
+        .toggle-ball-1 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--imdb-white);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Sidebar */
+        .sidebar-1 {
+            width: 60px;
+            height: calc(100vh - 60px);
+            background-color: var(--imdb-white);
+            position: fixed;
+            top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid var(--imdb-light-gray);
+        }
+        
+        .left-menu-icon-1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--imdb-gray);
+            cursor: pointer;
+        }
+        
+        .left-menu-icon-1:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        /* Main Content */
+        .container-1 {
+            margin-left: 60px;
+            padding: 20px 40px;
+            background-color: var(--imdb-white);
+        }
+        
+        .featured-content {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .featured-title {
+            position: absolute;
+            bottom: 100px;
+            left: 40px;
+            height: 150px;
+        }
+        
+        .featured-desc {
+            position: absolute;
+            bottom: 60px;
+            left: 40px;
+            color: var(--imdb-white);
+            max-width: 500px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .featured-button {
+            position: absolute;
+            bottom: 20px;
+            left: 40px;
+            background-color: var(--imdb-yellow);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* Movie List */
+        .movie-list-container {
+            margin-bottom: 50px;
+        }
+        
+        .movie-list-title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        .movie-list-wrapper {
+            position: relative;
+        }
+        
+        .movie-list {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+        
+        .movie-list::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .movie-list::-webkit-scrollbar-track {
+            background: var(--imdb-light-gray);
+            border-radius: 4px;
+        }
+        
+        .movie-list::-webkit-scrollbar-thumb {
+            background: var(--imdb-yellow);
+            border-radius: 4px;
+        }
+        
+        .movie-list-item {
+            flex: 0 0 200px;
+            position: relative;
+        }
+        
+        .movie-list-item-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .movie-list-item:hover .movie-list-item-img {
+            transform: scale(1.05);
+        }
+        
+        .movie-list-item-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 10px;
+            color: #000;
+        }
+        
+        .movie-list-item-desc {
+            font-size: 14px;
+            color: var(--imdb-gray);
+            margin-top: 5px;
+        }
+        
+        .movie-list-item-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--imdb-white);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .movie-list-item:hover .movie-list-item-button {
+            opacity: 1;
+        }
+        
+        /* IMDB Rating Styling */
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .rating-value {
+            font-weight: 500;
+            margin-right: 5px;
+        }
+        
+        .rating-star {
+            color: var(--imdb-yellow);
+            font-size: 14px;
+            margin-right: 2px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-1 {
+                padding: 0 20px;
+            }
+            
+            .menu-list-item-1 {
+                display: none;
+            }
+            
+            .sidebar-1 {
+                display: none;
+            }
+            
+            .container-1 {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .featured-content {
+                height: 300px;
+            }
+            
+            .featured-title {
+                height: 80px;
+                bottom: 60px;
+            }
+            
+            .featured-desc {
+                font-size: 14px;
+                max-width: 300px;
+                bottom: 30px;
+            }
+            
+            .movie-list-item {
+                flex: 0 0 150px;
+            }
+            
+            .movie-list-item-img {
+                height: 225px;
+            }
+        }
+    </style>
 </head>
-<div class="navbar-1">
-    <div class="navbar-container-1">
-        <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
-        <div class="menu-container-1">
-            <ul class="menu-list-1">
-                <li class="menu-list-item-1">Home</li>
-                <li class="menu-list-item-1">Movies</li>
-                <li class="menu-list-item-1">Series</li>
-                <li class="menu-list-item-1">Popular</li>
-                <li class="menu-list-item-1">Trends</li>
-                <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
-                <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
-                <a href="./blog.html"><li class="menu-list-item-1 active">Blog</li></a>
-            </ul>
-        </div>
-        <div class="profile-container">
-            <a href="./login.html">
-                <button type="button" class="btn btn-primary btn-sm">Login</button>
-              </a>
-              <a href="./register.html">
-                <button type="button" class="btn btn-secondary btn-sm">Register</button>
-              </a>
-            <div class="toggle-1">
-                <i class="fas fa-moon toggle-icon"></i>
-                <i class="fas fa-sun toggle-icon"></i>
-                <div class="toggle-ball-1"></div>
+<body>
+    <div class="navbar-1">
+        <div class="navbar-container-1">
+            <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
+            <div class="menu-container-1">
+                <ul class="menu-list-1">
+                    <li class="menu-list-item-1">Menu</li>
+                    <li class="menu-list-item-1">TV Shows</li>
+                    <li class="menu-list-item-1">Movies</li>
+                    <li class="menu-list-item-1">Awards & Events</li>
+                    <li class="menu-list-item-1">Celebs</li>
+                    <a href="./contactus.html"><li class="menu-list-item-1">Contact</li></a>
+                    <a href="./aboutus.html"><li class="menu-list-item-1">About</li></a>
+                    <a href="./blog.html"><li class="menu-list-item-1">Blog</li></a>
+                </ul>
+            </div>
+            <div class="profile-container">
+                <a href="./login.html">
+                    <button type="button" class="btn btn-primary btn-sm">Sign In</button>
+                </a>
+                <a href="./register.html">
+                    <button type="button" class="btn btn-secondary btn-sm">Register</button>
+                </a>
+                <div class="toggle-1">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball-1"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    
     <div class="sidebar-1">
-
         <i class="left-menu-icon-1 fa-solid fa-house"></i>    
         <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
         <i class="left-menu-icon-1 fa-solid fa-bookmark"></i>
@@ -51,66 +400,154 @@
         <i class="left-menu-icon-1 fa-solid fa-users"></i>
         <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
         <i class="left-menu-icon-1 fa-solid fa-tv"></i>
-    
     </div>
 
     <div class="container-1">
         <div class="content-container">
-            <div class="featured-content" style="background : linear-gradient(to bottom , rgba(0,0,0,0),#151515), url('img/chain.png');">
-
-            <img class="featured-title" src="img/movie.png" alt="">
-            <p class="featured-desc">
-                seyed amir musavi                 seyed amir musavi
-
-            </p><br>
-
-            <!-- <button class="featured-button">
-                WATCH
-            </button> -->
-
+            <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('img/chain.png');">
+                <img class="featured-title" src="img/movie.png" alt="">
+                <p class="featured-desc">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc eu nisl.
+                </p>
+                <button class="featured-button">WATCH TRAILER</button>
             </div>
 
-            <div class="movie-list-containe">
-
-                <!-- <h1 class="movie-list-titl">
-                    Top Films
-                </h1> -->
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">POPULAR MOVIES</h1>
                 <div class="movie-list-wrapper">
                     <div class="movie-list">
-                        
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/interstellar.jpg" alt="">
-                            <!-- <span class="movie-list-item-title">HER</span> -->
-                            <!-- <p class="movie-list-item-desc">interstellar erth destroying . . .</p> -->
-                             <br>
+                            <span class="movie-list-item-title">Interstellar</span>
+                            <div class="rating">
+                                <span class="rating-value">8.6</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">2014 ‧ Sci-fi/Adventure ‧ 2h 49m</p>
                             <button class="movie-list-item-button">WATCH</button>
-
                         </div>
-
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/matrix.jpg" alt="">
-                            <!-- <span class="movie-list-item-title">HER</span> -->
-                            <!-- <p class="movie-list-item-desc">matrix . real life & fake life . . .</p> -->
-                            <br>
+                            <span class="movie-list-item-title">The Matrix</span>
+                            <div class="rating">
+                                <span class="rating-value">8.7</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1999 ‧ Action/Sci-fi ‧ 2h 16m</p>
                             <button class="movie-list-item-button">WATCH</button>
-
                         </div>
-
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/inception.jpg" alt="">
-                            <!-- <span class="movie-list-item-title">HER</span> -->
-                            <!-- <p class="movie-list-item-desc">inception . dreams . . .</p> -->
-                            <br>
+                            <span class="movie-list-item-title">Inception</span>
+                            <div class="rating">
+                                <span class="rating-value">8.8</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">2010 ‧ Action/Sci-fi ‧ 2h 28m</p>
                             <button class="movie-list-item-button">WATCH</button>
-
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Dark Knight</span>
+                            <div class="rating">
+                                <span class="rating-value">9.0</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">2008 ‧ Action/Crime ‧ 2h 32m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Shawshank Redemption</span>
+                            <div class="rating">
+                                <span class="rating-value">9.3</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1994 ‧ Drama ‧ 2h 22m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Godfather</span>
+                            <div class="rating">
+                                <span class="rating-value">9.2</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1972 ‧ Crime/Drama ‧ 2h 55m</p>
+                            <button class="movie-list-item-button">WATCH</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
+            
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">TOP RATED MOVIES</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Godfather</span>
+                            <div class="rating">
+                                <span class="rating-value">9.2</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1972 ‧ Crime/Drama ‧ 2h 55m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Shawshank Redemption</span>
+                            <div class="rating">
+                                <span class="rating-value">9.3</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1994 ‧ Drama ‧ 2h 22m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Godfather Part II</span>
+                            <div class="rating">
+                                <span class="rating-value">9.0</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1974 ‧ Crime/Drama ‧ 3h 22m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Dark Knight</span>
+                            <div class="rating">
+                                <span class="rating-value">9.0</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">2008 ‧ Action/Crime ‧ 2h 32m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">The Lord of the Rings: The Return of the King</span>
+                            <div class="rating">
+                                <span class="rating-value">9.0</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">2003 ‧ Adventure/Fantasy ‧ 3h 21m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg" alt="">
+                            <span class="movie-list-item-title">Schindler's List</span>
+                            <div class="rating">
+                                <span class="rating-value">9.0</span>
+                                <i class="fas fa-star rating-star"></i>
+                            </div>
+                            <p class="movie-list-item-desc">1993 ‧ Biography/Drama ‧ 3h 15m</p>
+                            <button class="movie-list-item-button">WATCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 </html>
