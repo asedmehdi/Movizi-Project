@@ -360,6 +360,31 @@
         }
     </style>
 </head>
+
+
+<style>
+    /* اضافه کردن استایل ستاره */
+    .watchlist-star {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #ccc;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.2s;
+    }
+    
+    .watchlist-star:hover {
+        color: var(--imdb-yellow);
+    }
+    
+    .watchlist-star.active {
+        color: var(--imdb-yellow);
+    }
+</style>
+
+
 <body>
     <div class="navbar-1">
         <div class="navbar-container-1">
@@ -549,5 +574,59 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <script>
+        // ذخیره واچ لیست در localStorage
+        let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+        
+        // تابع برای آپدیت وضعیت ستاره
+        function updateStarIcons() {
+            document.querySelectorAll('.movie-list-item').forEach(item => {
+                const title = item.querySelector('.movie-list-item-title').textContent;
+                const star = item.querySelector('.watchlist-star');
+                
+                if (watchlist.includes(title)) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        // تابع برای اضافه/حذف از واچ لیست
+        function toggleWatchlist(movieTitle) {
+            const index = watchlist.indexOf(movieTitle);
+            
+            if (index === -1) {
+                watchlist.push(movieTitle);
+            } else {
+                watchlist.splice(index, 1);
+            }
+            
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+            updateStarIcons();
+        }
+        
+        // اضافه کردن ستاره به تمام فیلم‌ها
+        document.querySelectorAll('.movie-list-item').forEach(item => {
+            const star = document.createElement('i');
+            star.className = 'fas fa-bookmark watchlist-star';
+            star.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const title = item.querySelector('.movie-list-item-title').textContent;
+                toggleWatchlist(title);
+            });
+            item.appendChild(star);
+        });
+        
+        // آپدیت اولیه ستاره‌ها
+        updateStarIcons();
+    </script>
+
+
+
 </body>
 </html>
