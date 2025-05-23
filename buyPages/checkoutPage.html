@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Movizi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff88; /* Green accent */
+            --dark: #121212;
+            --darker: #0A0A0A;
+            --light: #ffffff;
+            --gray: #2a2a2a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+        }
+        
+        /* Simple Black Header */
+        header {
+            background-color: #000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .logo {
+            color: var(--primary);
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .checkout-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        .subscription-options {
+            margin-top: 20px;
+        }
+        
+        .subscription-card {
+            background-color: var(--darker);
+            border: 1px solid var(--gray);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .subscription-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .subscription-card.selected {
+            border: 2px solid var(--primary);
+            background-color: #00ff8810;
+        }
+        
+        .subscription-name {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .subscription-price {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .subscription-features {
+            margin-top: 15px;
+            list-style-type: none;
+        }
+        
+        .subscription-features li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .subscription-features li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        
+        .payment-summary {
+            background-color: var(--darker);
+            border-radius: 8px;
+            padding: 25px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .summary-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .cinematic-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to right, #000000cc, #00000000), 
+                        url('../img/checkout.jpg') center/cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        
+        .image-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="logo">MOVIZI</a>
+    </header>
+    
+    <div class="checkout-container">
+        <div class="checkout-details">
+            <div class="cinematic-image">
+                <div class="image-text">Unlimited Entertainment Awaits</div>
+            </div>
+            
+            <div class="subscription-options">
+                <h2>Choose Your Subscription</h2>
+                <p>Select the plan that works best for you</p>
+                
+                <div class="subscription-card selected">
+                    <div class="subscription-name">Basic</div>
+                    <div class="subscription-price">$7.99<span>/month</span></div>
+                    <ul class="subscription-features">
+                        <li>HD available</li>
+                        <li>Watch on 1 device at a time</li>
+                        <li>Cancel anytime</li>
+                    </ul>
+                </div>
+                
+                <div class="subscription-card">
+                    <div class="subscription-name">Standard</div>
+                    <div class="subscription-price">$10.99<span>/month</span></div>
+                    <ul class="subscription-features">
+                        <li>Full HD available</li>
+                        <li>Watch on 2 devices at a time</li>
+                        <li>Cancel anytime</li>
+                        <li>Download on 2 devices</li>
+                    </ul>
+                </div>
+                
+                <div class="subscription-card">
+                    <div class="subscription-name">Premium</div>
+                    <div class="subscription-price">$13.99<span>/month</span></div>
+                    <ul class="subscription-features">
+                        <li>Ultra HD available</li>
+                        <li>Watch on 4 devices at a time</li>
+                        <li>Cancel anytime</li>
+                        <li>Download on 6 devices</li>
+                        <li>Exclusive content</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-summary">
+            <h3 class="summary-title">Order Summary</h3>
+            
+            <div class="summary-item">
+                <span>Plan</span>
+                <span>Basic</span>
+            </div>
+            
+            <div class="summary-item">
+                <span>Subscription</span>
+                <span>Monthly</span>
+            </div>
+            
+            <div class="summary-item">
+                <span>Price</span>
+                <span>$7.99</span>
+            </div>
+            
+            <div class="total">
+                <span>Total</span>
+                <span>$7.99</span>
+            </div>
+            
+            <button class="checkout-btn" id="completePurchase">
+                <i class="fas fa-lock"></i> Complete Subscription
+            </button>
+            
+            
+        </div>
+    </div>
+
+    <script>
+
+
+document.querySelectorAll('.subscription-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const price = this.querySelector('.subscription-price').textContent;
+    document.querySelector('.total span:last-child').textContent = price;
+  });
+});
+
+        
+        document.getElementById('completePurchase').addEventListener('click', function() {
+            // Randomly redirect to success or failure page (50% chance each)
+            const random = Math.random();
+            if (random < 0.5) {
+                window.location.href = 'paymentSuccess.html';
+            } else {
+                window.location.href = 'paymentFailure.html';
+            }
+        });
+
+        // Subscription selection logic
+        const subscriptionCards = document.querySelectorAll('.subscription-card');
+        subscriptionCards.forEach(card => {
+            card.addEventListener('click', function() {
+                subscriptionCards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Update order summary (you can enhance this further)
+                const planName = this.querySelector('.subscription-name').textContent;
+                const planPrice = this.querySelector('.subscription-price').textContent;
+                document.querySelector('.summary-item:nth-child(1) span:last-child').textContent = planName;
+                document.querySelector('.summary-item:nth-child(3) span:last-child').textContent = planPrice;
+                document.querySelector('.total span:last-child').textContent = planPrice;
+            });
+        });
+    </script>
+</body>
+</html>
