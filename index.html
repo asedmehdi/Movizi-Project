@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,17 +25,79 @@
         }
         
         body {
-            background-color: var(--imdb-white);
+            background-color: var(--imdb-dark);
+            color: var(--imdb-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--imdb-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(245, 197, 24, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--imdb-yellow);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--imdb-yellow);
             color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 0.8;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
         }
         
         /* Navbar */
         .navbar-1 {
-            background-color: var(--imdb-white);
+            background-color: var(--imdb-dark);
             height: 60px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid var(--imdb-light-gray);
+            border-bottom: 1px solid var(--imdb-light-dark);
             padding: 0 40px;
             position: sticky;
             top: 0;
@@ -71,7 +133,7 @@
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            color: #000;
+            color: var(--imdb-white);
         }
         
         .menu-list-item-1:hover {
@@ -101,14 +163,14 @@
         .btn-secondary {
             background-color: transparent;
             border: 1px solid var(--imdb-gray);
-            color: #000;
+            color: var(--imdb-white);
         }
         
         .toggle-1 {
             position: relative;
             width: 40px;
             height: 20px;
-            background-color: var(--imdb-light-gray);
+            background-color: var(--imdb-light-dark);
             border-radius: 10px;
             margin-left: 15px;
             cursor: pointer;
@@ -122,11 +184,13 @@
         .fa-moon {
             left: 5px;
             top: 4px;
+            color: var(--imdb-yellow);
         }
         
         .fa-sun {
             right: 5px;
             top: 4px;
+            color: var(--imdb-gray);
         }
         
         .toggle-ball-1 {
@@ -136,7 +200,8 @@
             background-color: var(--imdb-white);
             border-radius: 50%;
             top: 2px;
-            left: 2px;
+            right: 2px;
+            left: auto;
             transition: transform 0.3s ease;
         }
         
@@ -144,14 +209,14 @@
         .sidebar-1 {
             width: 60px;
             height: calc(100vh - 60px);
-            background-color: var(--imdb-white);
+            background-color: var(--imdb-dark);
             position: fixed;
             top: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 20px;
-            border-right: 1px solid var(--imdb-light-gray);
+            border-right: 1px solid var(--imdb-light-dark);
         }
         
         .left-menu-icon-1 {
@@ -169,7 +234,8 @@
         .container-1 {
             margin-left: 60px;
             padding: 20px 40px;
-            background-color: var(--imdb-white);
+            background-color: var(--imdb-dark);
+            flex: 1;
         }
         
         .featured-content {
@@ -180,13 +246,64 @@
             margin-bottom: 50px;
             border-radius: 8px;
             overflow: hidden;
+            transition: background-image 1s ease-in-out;
         }
         
-        .featured-title {
+        /* Navigation arrows */
+        .featured-nav {
             position: absolute;
-            bottom: 100px;
-            left: 40px;
-            height: 150px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .featured-nav:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .featured-prev {
+            left: 20px;
+        }
+        
+        .featured-next {
+            right: 20px;
+        }
+        
+        /* Dots indicator */
+        .featured-dots {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .featured-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .featured-dot.active {
+            background-color: var(--imdb-yellow);
+            transform: scale(1.2);
         }
         
         .featured-desc {
@@ -197,6 +314,7 @@
             max-width: 500px;
             font-size: 16px;
             line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
         
         .featured-button {
@@ -210,6 +328,11 @@
             border-radius: 4px;
             font-weight: 500;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .featured-button:hover {
+            background-color: #e6b800;
         }
         
         /* Movie List */
@@ -221,7 +344,7 @@
             font-size: 24px;
             font-weight: 500;
             margin-bottom: 20px;
-            color: #000;
+            color: var(--imdb-white);
         }
         
         .movie-list-wrapper {
@@ -240,7 +363,7 @@
         }
         
         .movie-list::-webkit-scrollbar-track {
-            background: var(--imdb-light-gray);
+            background: var(--imdb-light-dark);
             border-radius: 4px;
         }
         
@@ -270,7 +393,7 @@
             font-size: 16px;
             font-weight: 500;
             margin-top: 10px;
-            color: #000;
+            color: var(--imdb-white);
         }
         
         .movie-list-item-desc {
@@ -308,12 +431,73 @@
         .rating-value {
             font-weight: 500;
             margin-right: 5px;
+            color: var(--imdb-white);
         }
         
         .rating-star {
             color: var(--imdb-yellow);
             font-size: 14px;
             margin-right: 2px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--imdb-light-dark);
+            color: var(--imdb-white);
+            padding: 40px;
+            margin-left: 60px;
+            border-top: 1px solid var(--imdb-gray);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h3 {
+            color: var(--imdb-yellow);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: var(--imdb-light-gray);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--imdb-yellow);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--imdb-gray);
+            color: var(--imdb-gray);
+            font-size: 14px;
         }
         
         /* Responsive */
@@ -330,7 +514,7 @@
                 display: none;
             }
             
-            .container-1 {
+            .container-1, footer {
                 margin-left: 0;
                 padding: 20px;
             }
@@ -339,15 +523,25 @@
                 height: 300px;
             }
             
-            .featured-title {
-                height: 80px;
-                bottom: 60px;
-            }
-            
             .featured-desc {
                 font-size: 14px;
                 max-width: 300px;
                 bottom: 30px;
+            }
+            
+            .featured-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .featured-nav {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+            
+            .featured-dots {
+                bottom: 60px;
             }
             
             .movie-list-item {
@@ -357,35 +551,31 @@
             .movie-list-item-img {
                 height: 225px;
             }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+            
+            .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
-
-
-<style>
-    /* اضافه کردن استایل ستاره */
-    .watchlist-star {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        color: #ccc;
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 10;
-        transition: all 0.2s;
-    }
+<body class="dark-mode">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
     
-    .watchlist-star:hover {
-        color: var(--imdb-yellow);
-    }
-    
-    .watchlist-star.active {
-        color: var(--imdb-yellow);
-    }
-</style>
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
-
-<body>
     <div class="navbar-1">
         <div class="navbar-container-1">
             <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
@@ -429,12 +619,14 @@
 
     <div class="container-1">
         <div class="content-container">
-            <div class="featured-content" style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('img/chain.png');">
-                <img class="featured-title" src="img/movie.png" alt="">
-                <p class="featured-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc eu nisl.
+            <div class="featured-content" id="featuredContent">
+                <button class="featured-nav featured-prev" id="featuredPrev">❮</button>
+                <button class="featured-nav featured-next" id="featuredNext">❯</button>
+                <div class="featured-dots" id="featuredDots"></div>
+                <p class="featured-desc" id="featuredDesc">
+                    Experience the epic conclusion to Christopher Nolan's Dark Knight trilogy. Witness Batman's confrontation with the terrifying Bane.
                 </p>
-                <button class="featured-button">WATCH TRAILER</button>
+                <button class="featured-button" id="featuredButton">WATCH TRAILER</button>
             </div>
 
             <div class="movie-list-container">
@@ -449,7 +641,7 @@
                                 <i class="fas fa-star rating-star"></i>
                             </div>
                             <p class="movie-list-item-desc">2014 ‧ Sci-fi/Adventure ‧ 2h 49m</p>
-                            <button class="movie-list-item-button">WATCH</button>
+                            <a href="showfilm.html"><button class="movie-list-item-button">WATCH</button></a>
                         </div>
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/matrix.jpg" alt="">
@@ -459,7 +651,7 @@
                                 <i class="fas fa-star rating-star"></i>
                             </div>
                             <p class="movie-list-item-desc">1999 ‧ Action/Sci-fi ‧ 2h 16m</p>
-                            <button class="movie-list-item-button">WATCH</button>
+                            <a href="showfilm.html"><button class="movie-list-item-button">WATCH</button></a>
                         </div>
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="img/inception.jpg" alt="">
@@ -469,7 +661,7 @@
                                 <i class="fas fa-star rating-star"></i>
                             </div>
                             <p class="movie-list-item-desc">2010 ‧ Action/Sci-fi ‧ 2h 28m</p>
-                            <button class="movie-list-item-button">WATCH</button>
+                            <a href="showfilm.html"><button class="movie-list-item-button">WATCH</button></a>
                         </div>
                         <div class="movie-list-item">
                             <img class="movie-list-item-img" src="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" alt="">
@@ -527,6 +719,7 @@
                                 <i class="fas fa-star rating-star"></i>
                             </div>
                             <p class="movie-list-item-desc">1994 ‧ Drama ‧ 2h 22m</p>
+                            
                             <button class="movie-list-item-button">WATCH</button>
                         </div>
                         <div class="movie-list-item">
@@ -574,59 +767,220 @@
             </div>
         </div>
     </div>
-
-
-
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Movizi</h3>
+                <p>Your ultimate destination for movie reviews, ratings, and information about all your favorite films and TV shows.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Movies</a>
+                <a href="#">TV Shows</a>
+                <a href="#">Celebrities</a>
+                <a href="#">News</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@movizi.com</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Movie Street, Hollywood, CA 90210, USA</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Movizi. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        // ذخیره واچ لیست در localStorage
-        let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+        // Loading Animation
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1000); // Adjust time as needed (1000ms = 1 second)
+        });
+
+        // Scroll to Top Button
+        const scrollToTopButton = document.getElementById('scrollToTop');
         
-        // تابع برای آپدیت وضعیت ستاره
-        function updateStarIcons() {
-            document.querySelectorAll('.movie-list-item').forEach(item => {
-                const title = item.querySelector('.movie-list-item-title').textContent;
-                const star = item.querySelector('.watchlist-star');
-                
-                if (watchlist.includes(title)) {
-                    star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Featured content rotation
+        const featuredContent = document.getElementById('featuredContent');
+        const featuredDesc = document.getElementById('featuredDesc');
+        const featuredButton = document.getElementById('featuredButton');
+        const featuredPrev = document.getElementById('featuredPrev');
+        const featuredNext = document.getElementById('featuredNext');
+        const featuredDots = document.getElementById('featuredDots');
+        
+        const featuredItems = [
+            {
+                background: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
+                description: "Experience the epic conclusion to Christopher Nolan's Dark Knight trilogy. Witness Batman's confrontation with the terrifying Bane.",
+                buttonText: "WATCH THE DARK KNIGHT TRAILER"
+            },
+            {
+                background: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+                description: "The aging patriarch of an organized crime dynasty transfers control to his reluctant son in this classic gangster film.",
+                buttonText: "WATCH THE GODFATHER TRAILER"
+            },
+            {
+                background: "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
+                description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                buttonText: "WATCH SHAWSHANK TRAILER"
+            },
+            {
+                background: "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+                description: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom.",
+                buttonText: "WATCH RETURN OF THE KING TRAILER"
+            }
+        ];
+        
+        let currentItem = 0;
+        let rotationInterval;
+        
+        // Create dots
+        function createDots() {
+            featuredItems.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('featured-dot');
+                if (index === currentItem) {
+                    dot.classList.add('active');
+                }
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                featuredDots.appendChild(dot);
+            });
+        }
+        
+        // Update dots
+        function updateDots() {
+            const dots = document.querySelectorAll('.featured-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentItem);
+            });
+        }
+        
+        // Go to specific slide
+        function goToSlide(index) {
+            currentItem = index;
+            updateSlide();
+            resetRotation();
+        }
+        
+        // Update slide content
+        function updateSlide() {
+            const item = featuredItems[currentItem];
+            featuredContent.style.backgroundImage = `linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7)), url('${item.background}')`;
+            featuredDesc.textContent = item.description;
+            featuredButton.textContent = item.buttonText;
+            updateDots();
+        }
+        
+        // Next slide
+        function nextSlide() {
+            currentItem = (currentItem + 1) % featuredItems.length;
+            updateSlide();
+            resetRotation();
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            currentItem = (currentItem - 1 + featuredItems.length) % featuredItems.length;
+            updateSlide();
+            resetRotation();
+        }
+        
+        // Reset auto rotation timer
+        function resetRotation() {
+            clearInterval(rotationInterval);
+            rotationInterval = setInterval(nextSlide, 7000);
+        }
+        
+        // Initialize
+        function initFeaturedContent() {
+            createDots();
+            updateSlide();
+            rotationInterval = setInterval(nextSlide, 7000);
+            
+            // Event listeners
+            featuredNext.addEventListener('click', nextSlide);
+            featuredPrev.addEventListener('click', prevSlide);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
                 }
             });
         }
+
+        // Initialize featured content
+        initFeaturedContent();
         
-        // تابع برای اضافه/حذف از واچ لیست
-        function toggleWatchlist(movieTitle) {
-            const index = watchlist.indexOf(movieTitle);
-            
-            if (index === -1) {
-                watchlist.push(movieTitle);
+        // Dark mode toggle (already in dark mode by default)
+        const toggleBall = document.querySelector('.toggle-ball-1');
+        const toggle = document.querySelector('.toggle-1');
+        const items = document.querySelectorAll(
+            '.container-1, .movie-list-title, .navbar-1, .sidebar-1, body, .movie-list-item-title, .menu-list-item-1'
+        );
+        
+        // Set initial dark mode state
+        document.body.classList.add('dark-mode');
+        toggleBall.style.transform = 'translateX(20px)';
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleBall.style.transform = 'translateX(20px)';
+                document.body.style.backgroundColor = '#121212';
+                document.body.style.color = 'white';
             } else {
-                watchlist.splice(index, 1);
+                toggleBall.style.transform = 'translateX(0)';
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
             }
-            
-            localStorage.setItem('watchlist', JSON.stringify(watchlist));
-            updateStarIcons();
-        }
-        
-        // اضافه کردن ستاره به تمام فیلم‌ها
-        document.querySelectorAll('.movie-list-item').forEach(item => {
-            const star = document.createElement('i');
-            star.className = 'fas fa-bookmark watchlist-star';
-            star.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const title = item.querySelector('.movie-list-item-title').textContent;
-                toggleWatchlist(title);
-            });
-            item.appendChild(star);
         });
-        
-        // آپدیت اولیه ستاره‌ها
-        updateStarIcons();
     </script>
-
-
-
 </body>
 </html>

@@ -3,28 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Details</title>
+    <title>God of War: Ragnarök - Game Details | Movizi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style/style.css">
+    <style>
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-dark: #121212;
+            --imdb-light-dark: #2c2c2c;
+            --imdb-gray: #757575;
+            --imdb-light-gray: #e6e6e6;
+            --imdb-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--imdb-dark);
+            color: var(--imdb-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar-1 {
+            background-color: var(--imdb-dark);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--imdb-light-dark);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container-1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-1 {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+
+        .menu-container-1 {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .menu-list-1 {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            white-space: nowrap;
+            padding-bottom: 5px;
+        }
+
+        .menu-list-1::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-list-item-1 {
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--imdb-white);
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-list-item-1:hover {
+            color: var(--imdb-yellow);
+            background-color: rgba(245, 197, 24, 0.1);
+        }
+
+        .menu-list-item-1.active {
+            color: var(--imdb-yellow);
+            background-color: rgba(245, 197, 24, 0.2);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--imdb-yellow);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--imdb-gray);
+            color: var(--imdb-white);
+        }
+
+        .toggle-1 {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--imdb-light-dark);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            font-size: 12px;
+        }
+
+        .fa-moon {
+            left: 5px;
+            top: 4px;
+            color: var(--imdb-yellow);
+        }
+
+        .fa-sun {
+            right: 5px;
+            top: 4px;
+            color: var(--imdb-gray);
+        }
+
+        .toggle-ball-1 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--imdb-white);
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Sidebar */
+        .sidebar-1 {
+            width: 60px;
+            height: calc(100vh - 60px);
+            background-color: var(--imdb-dark);
+            position: fixed;
+            top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid var(--imdb-light-dark);
+        }
+
+        .left-menu-icon-1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--imdb-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .left-menu-icon-1:hover {
+            color: var(--imdb-yellow);
+        }
+
+        /* Main Content */
+        .container {
+            margin-left: 60px;
+            padding: 40px;
+            flex: 1;
+        }
+
+        /* Game Details Styles */
+        .game-details {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .game-poster-container {
+            flex: 0 0 300px;
+        }
+
+        .game-poster {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .game-actions .btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .game-title {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--imdb-yellow);
+        }
+
+        .game-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--imdb-gray);
+        }
+
+        .game-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .game-description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Game Sections */
+        .game-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--imdb-light-dark);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .screenshots-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .screenshots-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            gap: 10px;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--imdb-yellow);
+        }
+
+        /* Reviews */
+        .review {
+            background-color: var(--imdb-light-dark);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: 500;
+            color: var(--imdb-yellow);
+        }
+
+        .review-rating {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+        }
+
+        .review-content {
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--imdb-light-dark);
+            color: var(--imdb-white);
+            padding: 40px;
+            margin-left: 60px;
+            border-top: 1px solid var(--imdb-gray);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            color: var(--imdb-yellow);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--imdb-light-gray);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--imdb-yellow);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--imdb-yellow);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--imdb-gray);
+            color: var(--imdb-gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-1 {
+                padding: 0 20px;
+            }
+
+            .menu-list-item-1 {
+                display: none;
+            }
+
+            .sidebar-1 {
+                display: none;
+            }
+
+            .container, footer {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .game-header {
+                flex-direction: column;
+            }
+            
+            .game-poster-container {
+                flex: 1;
+            }
+            
+            .game-title {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="dark-mode">
     <div class="navbar-1">
         <div class="navbar-container-1">
             <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
             <div class="menu-container-1">
                 <ul class="menu-list-1">
-                    <li class="menu-list-item-1">Home</li>
+                    <li class="menu-list-item-1 active">Home</li>
                     <li class="menu-list-item-1">Movies</li>
                     <li class="menu-list-item-1">Series</li>
                     <li class="menu-list-item-1">Popular</li>
                     <li class="menu-list-item-1">Trends</li>
-                    <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
-                    <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
-                    <a href="./blog.html"><li class="menu-list-item-1 active">Blog</li></a>
+                    <a href="./contactus.html"><li class="menu-list-item-1">Contact</li></a>
+                    <a href="./aboutus.html"><li class="menu-list-item-1">About</li></a>
+                    <a href="./blog.html"><li class="menu-list-item-1">Blog</li></a>
                 </ul>
             </div>
             <div class="profile-container">
@@ -42,6 +461,7 @@
             </div>
         </div>
     </div>
+
     <div class="sidebar-1">
         <i class="left-menu-icon-1 fa-solid fa-house"></i>    
         <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
@@ -51,31 +471,175 @@
         <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
         <i class="left-menu-icon-1 fa-solid fa-tv"></i>
     </div>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-8">
-                <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" alt="Game Image" class="img-fluid mb-4">
-                <h1>Game Title</h1>
-                <p><strong>Author:</strong> John Doe</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat massa at urna posuere, ut cursus erat tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat massa at urna posuere, ut cursus erat tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat massa at urna posuere, ut cursus erat tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat massa at urna posuere, ut cursus erat tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent consequat massa at urna posuere, ut cursus erat tristique.</p>
-            </div>
-            <div class="col-md-4">
-                <h5>Comments</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="commentText" class="form-label">Leave a Comment</label>
-                        <textarea id="commentText" class="form-control" rows="4" placeholder="Write your comment here..."></textarea>
+
+    <div class="container">
+        <div class="game-details">
+            <!-- Game Header -->
+            <div class="game-header">
+                <div class="game-poster-container">
+                    <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png" alt="God of War: Ragnarök" class="game-poster">
+                    <div class="game-actions">
+                        <button class="btn btn-primary"><i class="fas fa-play"></i> Trailer</button>
+                        <button class="btn btn-secondary"><i class="fas fa-bookmark"></i> Wishlist</button>
+                        <button class="btn btn-secondary"><i class="fas fa-share"></i> Share</button>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-                <div class="mt-4">
-                    <p><strong>User1:</strong> Great game!</p>
-                    <p><strong>User2:</strong> I love the graphics and storyline!</p>
+                </div>
+                <div class="game-info">
+                    <h1 class="game-title">God of War: Ragnarök</h1>
+                    <div class="game-meta">
+                        <span class="game-rating"><i class="fas fa-star"></i> 9.5/10</span>
+                        <span class="game-release">Release: November 9, 2022</span>
+                        <span class="game-genre">Genre: Action, Adventure</span>
+                        <span class="game-platform">Platform: PS5, PS4</span>
+                    </div>
+                    <div class="game-description">
+                        <p>Join Kratos and Atreus on a mythic journey for answers before Ragnarök arrives. Together, father and son must put everything on the line as they journey to each of the Nine Realms.</p>
+                        <p>From the marble and columns of ornate Olympus to the gritty forests, mountains, and caves of pre-Viking Norse lore, this is a distinctly new realm with its own pantheon of creatures, monsters, and gods.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Content Sections -->
+            <div class="game-content">
+                <div class="game-section">
+                    <h2 class="section-title">Screenshots</h2>
+                    <div class="screenshots-grid">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png" alt="Screenshot 1">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png" alt="Screenshot 2">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png" alt="Screenshot 3">
+                    </div>
+                </div>
+
+                <div class="game-section">
+                    <h2 class="section-title">Game Details</h2>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Developer:</span>
+                            <span class="detail-value">Santa Monica Studio</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Publisher:</span>
+                            <span class="detail-value">Sony Interactive Entertainment</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Release Date:</span>
+                            <span class="detail-value">November 9, 2022</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Platforms:</span>
+                            <span class="detail-value">PlayStation 5, PlayStation 4</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Genre:</span>
+                            <span class="detail-value">Action-adventure, Hack and slash</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Modes:</span>
+                            <span class="detail-value">Single-player</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-section">
+                    <h2 class="section-title">Reviews</h2>
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-author">IGN</div>
+                            <div class="review-rating">10/10</div>
+                        </div>
+                        <div class="review-content">
+                            <p>God of War Ragnarök is an almighty achievement and creates a new high that makes many of its peers look mortal by comparison.</p>
+                        </div>
+                    </div>
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-author">GameSpot</div>
+                            <div class="review-rating">9/10</div>
+                        </div>
+                        <div class="review-content">
+                            <p>Ragnarök is a triumphant finale to the Norse saga that improves upon its predecessor in nearly every way.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Movizi</h3>
+                <p>Your ultimate destination for movie reviews, ratings, and information.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Movies</a>
+                <a href="#">TV Shows</a>
+                <a href="#">Celebrities</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@movizi.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Movizi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleBall = document.querySelector('.toggle-ball-1');
+        const toggle = document.querySelector('.toggle-1');
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleBall.style.transform = 'translateX(20px)';
+                document.body.style.backgroundColor = '#121212';
+                document.body.style.color = 'white';
+            } else {
+                toggleBall.style.transform = 'translateX(0)';
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+
+        // Menu scroll functionality
+        const menuList = document.querySelector('.menu-list-1');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        menuList.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - menuList.offsetLeft;
+            scrollLeft = menuList.scrollLeft;
+        });
+
+        menuList.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        menuList.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        menuList.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - menuList.offsetLeft;
+            const walk = (x - startX) * 2;
+            menuList.scrollLeft = scrollLeft - walk;
+        });
+    </script>
 </body>
 </html>

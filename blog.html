@@ -3,15 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
+    <title>Movizi - Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style/style.css">
+    <style>
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-dark: #121212;
+            --imdb-light-dark: #2c2c2c;
+            --imdb-gray: #757575;
+            --imdb-light-gray: #e6e6e6;
+            --imdb-white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--imdb-dark);
+            color: var(--imdb-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navbar */
+        .navbar-1 {
+            background-color: var(--imdb-dark);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--imdb-light-dark);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-container-1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-1 {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+        
+        .menu-container-1 {
+            flex-grow: 1;
+        }
+        
+        .menu-list-1 {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu-list-item-1 {
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--imdb-white);
+        }
+        
+        .menu-list-item-1:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        .menu-list-item-1.active {
+            color: var(--imdb-yellow);
+        }
+        
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--imdb-yellow);
+            color: #000;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--imdb-gray);
+            color: var(--imdb-white);
+        }
+        
+        .toggle-1 {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--imdb-light-dark);
+            border-radius: 10px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        .toggle-icon {
+            position: absolute;
+            font-size: 12px;
+        }
+        
+        .fa-moon {
+            left: 5px;
+            top: 4px;
+            color: var(--imdb-yellow);
+        }
+        
+        .fa-sun {
+            right: 5px;
+            top: 4px;
+            color: var(--imdb-gray);
+        }
+        
+        .toggle-ball-1 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--imdb-white);
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            left: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Sidebar */
+        .sidebar-1 {
+            width: 60px;
+            height: calc(100vh - 60px);
+            background-color: var(--imdb-dark);
+            position: fixed;
+            top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid var(--imdb-light-dark);
+        }
+        
+        .left-menu-icon-1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--imdb-gray);
+            cursor: pointer;
+        }
+                /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--imdb-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        .left-menu-icon-1:hover {
+            color: var(--imdb-yellow);
+        }
+                .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--imdb-yellow);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 0.8;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+            .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+        /* Main Content */
+        .container-1 {
+            margin-left: 60px;
+            padding: 20px 40px;
+            background-color: var(--imdb-dark);
+            flex: 1;
+        }
+        
+        /* Blog Content */
+        .blog-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .blog-filters {
+            width: 250px;
+            background-color: var(--imdb-light-dark);
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+        
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        
+        .filter-section h3 {
+            color: var(--imdb-yellow);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-option input {
+            margin-right: 10px;
+        }
+        
+        .filter-option label {
+            cursor: pointer;
+        }
+        
+        .filter-option:hover label {
+            color: var(--imdb-yellow);
+        }
+        
+        .blog-posts {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(245, 197, 24, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--imdb-yellow);
+            animation: spin 1s ease-in-out infinite;
+        }
+        .blog-card {
+            background-color: var(--imdb-light-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--imdb-gray);
+        }
+        
+        .blog-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--imdb-white);
+        }
+        
+        .blog-excerpt {
+            color: var(--imdb-light-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .read-more {
+            color: var(--imdb-yellow);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--imdb-light-dark);
+            color: var(--imdb-white);
+            padding: 40px;
+            margin-left: 60px;
+            border-top: 1px solid var(--imdb-gray);
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-section h3 {
+            color: var(--imdb-yellow);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: var(--imdb-light-gray);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--imdb-yellow);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--imdb-gray);
+            color: var(--imdb-gray);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-1 {
+                padding: 0 20px;
+            }
+            
+            .menu-list-item-1 {
+                display: none;
+            }
+            
+            .sidebar-1 {
+                display: none;
+            }
+            
+            .container-1, footer {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .blog-container {
+                flex-direction: column;
+            }
+            
+            .blog-filters {
+                width: 100%;
+            }
+            
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <div class="navbar-1">
         <div class="navbar-container-1">
             <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
@@ -22,18 +460,18 @@
                     <li class="menu-list-item-1">Series</li>
                     <li class="menu-list-item-1">Popular</li>
                     <li class="menu-list-item-1">Trends</li>
-                    <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
-                    <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
+                    <a href="./contactus.html"><li class="menu-list-item-1">Contact</li></a>
+                    <a href="./aboutus.html"><li class="menu-list-item-1">About</li></a>
                     <a href="./blog.html"><li class="menu-list-item-1 active">Blog</li></a>
                 </ul>
             </div>
             <div class="profile-container">
-                <a href="./login.html">
-                    <button type="button" class="btn btn-primary btn-sm">Login</button>
-                  </a>
-                  <a href="./register.html">
-                    <button type="button" class="btn btn-secondary btn-sm">Register</button>
-                  </a>
+                <div class="profile-menu">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar" width="32" height="32" style="border-radius:50%;">
+                </div>
+                <a href="./user_dashboard.html">
+                    <button type="button" class="btn btn-primary btn-sm">Dashboard</button>
+                </a>
                 <div class="toggle-1">
                     <i class="fas fa-moon toggle-icon"></i>
                     <i class="fas fa-sun toggle-icon"></i>
@@ -42,6 +480,7 @@
             </div>
         </div>
     </div>
+    
     <div class="sidebar-1">
         <i class="left-menu-icon-1 fa-solid fa-house"></i>    
         <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
@@ -51,109 +490,266 @@
         <i class="left-menu-icon-1 fa-solid fa-hourglass-half"></i>
         <i class="left-menu-icon-1 fa-solid fa-tv"></i>
     </div>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <!-- Search section -->
-            <div class="col-md-3">
-                <div class="card p-4">
-                    <h5 class="card-title">Search Movies</h5>
-                    <form id="searchForm">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" placeholder="Search by title">
-                        </div>
-                        <div class="mb-3">
-                            <label for="genre" class="form-label">Genre</label>
-                            <select class="form-select" id="genre">
-                                <option value="" selected>Choose genre</option>
-                                <option value="action">Action</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="drama">Drama</option>
-                                <option value="horror">Horror</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="genre" class="form-label">Genre</label>
-                            <select class="form-select" id="genre">
-                                <option value="" selected>Choose genre</option>
-                                <option value="action">Action</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="drama">Drama</option>
-                                <option value="horror">Horror</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="genre" class="form-label">Genre</label>
-                            <select class="form-select" id="genre">
-                                <option value="" selected>Choose genre</option>
-                                <option value="action">Action</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="drama">Drama</option>
-                                <option value="horror">Horror</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Search</button>
-                    </form>
+
+    <div class="container-1">
+        <h1 class="movie-list-title">Movie Blog</h1>
+        <div class="blog-container">
+            <div class="blog-filters">
+                <div class="filter-section">
+                    <h3>Categories</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="reviews" checked>
+                        <label for="reviews">Movie Reviews</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="news" checked>
+                        <label for="news">Industry News</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="interviews" checked>
+                        <label for="interviews">Interviews</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="analysis" checked>
+                        <label for="analysis">Film Analysis</label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Tags</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="action" checked>
+                        <label for="action">Action</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="drama" checked>
+                        <label for="drama">Drama</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="scifi" checked>
+                        <label for="scifi">Sci-Fi</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="comedy" checked>
+                        <label for="comedy">Comedy</label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Recent Posts</h3>
+                    <div class="recent-post">
+                        <a href="#" class="recent-post-link">The Evolution of Superhero Movies</a>
+                        <div class="recent-post-date">May 15, 2023</div>
+                    </div>
+                    <div class="recent-post">
+                        <a href="#" class="recent-post-link">Interview with Director Christopher Nolan</a>
+                        <div class="recent-post-date">April 28, 2023</div>
+                    </div>
+                    <div class="recent-post">
+                        <a href="#" class="recent-post-link">Top 10 Movies of 2023 So Far</a>
+                        <div class="recent-post-date">April 10, 2023</div>
+                    </div>
                 </div>
             </div>
-            <!-- Movie cards -->
-            <div class="col-md-9">
-                <div class="d-flex flex-wrap gap-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+            
+            <div class="blog-posts">
+                <div class="blog-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg" alt="The Dark Knight" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Movie Review</span>
+                            <span class="blog-date">June 5, 2023</span>
                         </div>
+                        <h3 class="blog-title">The Dark Knight: A Masterpiece Revisited</h3>
+                        <p class="blog-excerpt">Fifteen years after its release, Christopher Nolan's The Dark Knight remains the gold standard for superhero films. This in-depth review explores why...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <!-- Duplicate cards for demonstration -->
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="The Godfather" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Film Analysis</span>
+                            <span class="blog-date">May 28, 2023</span>
                         </div>
+                        <h3 class="blog-title">The Godfather at 50: Why It Still Matters</h3>
+                        <p class="blog-excerpt">As Francis Ford Coppola's masterpiece turns 50, we examine the film's enduring legacy and its influence on modern cinema...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" alt="Shawshank Redemption" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Industry News</span>
+                            <span class="blog-date">May 20, 2023</span>
                         </div>
+                        <h3 class="blog-title">Upcoming Stephen King Adaptations in 2023</h3>
+                        <p class="blog-excerpt">From The Shawshank Redemption to It, Stephen King's works have produced some of cinema's greatest films. Here's what's coming next...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" alt="Lord of the Rings" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Interview</span>
+                            <span class="blog-date">May 12, 2023</span>
                         </div>
+                        <h3 class="blog-title">Peter Jackson Reflects on LOTR 20 Years Later</h3>
+                        <p class="blog-excerpt">The director shares never-before-told stories from the set of the Lord of the Rings trilogy and discusses the challenges of bringing Middle-earth to life...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BNDE4OTMxMTctNmRhYy00NWE2LTg3YzItYTk3M2UwOTU5Njg4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg" alt="Schindler's List" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Film Analysis</span>
+                            <span class="blog-date">May 5, 2023</span>
                         </div>
+                        <h3 class="blog-title">The Power of Black and White in Schindler's List</h3>
+                        <p class="blog-excerpt">How Spielberg's decision to shoot in monochrome enhanced the emotional impact of this Holocaust drama...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img src="img/god-of-war-kratos-red-tattoos-is5vckclyv5nbivb.jpg" class="card-img-top" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="./detail.html" class="btn btn-primary">Go somewhere</a>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="img/inception.jpg" alt="Inception" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Movie Review</span>
+                            <span class="blog-date">April 30, 2023</span>
                         </div>
+                        <h3 class="blog-title">Inception: Decoding Nolan's Dream Within a Dream</h3>
+                        <p class="blog-excerpt">A deep dive into the complex narrative structure and philosophical themes of Christopher Nolan's mind-bending thriller...</p>
+                        <a href="detail.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
-                    <!-- Add more cards as needed -->
                 </div>
             </div>
         </div>
     </div>
     
-    </body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Movizi</h3>
+                <p>Your ultimate destination for movie reviews, ratings, and information about all your favorite films and TV shows.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Movies</a>
+                <a href="#">TV Shows</a>
+                <a href="#">Celebrities</a>
+                <a href="#">News</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@movizi.com</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Movie Street, Hollywood, CA 90210, USA</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Movizi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1000); // Adjust time as needed (1000ms = 1 second)
+        });
+
+        // Scroll to Top Button
+        const scrollToTopButton = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Dark mode toggle (already in dark mode by default)
+        const toggleBall = document.querySelector('.toggle-ball-1');
+        const toggle = document.querySelector('.toggle-1');
+        const items = document.querySelectorAll(
+            '.container-1, .movie-list-title, .navbar-1, .sidebar-1, body, .movie-list-item-title, .menu-list-item-1'
+        );
+        
+        // Set initial dark mode state
+        document.body.classList.add('dark-mode');
+        toggleBall.style.transform = 'translateX(20px)';
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleBall.style.transform = 'translateX(20px)';
+                document.body.style.backgroundColor = '#121212';
+                document.body.style.color = 'white';
+            } else {
+                toggleBall.style.transform = 'translateX(0)';
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+
+        // Blog filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.blog-filters input[type="checkbox"]');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', filterBlogPosts);
+            });
+            
+            function filterBlogPosts() {
+                // In a real implementation, this would filter the blog posts
+                // based on the selected categories and tags
+                console.log('Filtering blog posts...');
+                // This would typically involve:
+                // 1. Getting all selected categories/tags
+                // 2. Filtering the blog posts array
+                // 3. Updating the DOM to show only matching posts
+            }
+        });
+    </script>
+</body>
 </html>
