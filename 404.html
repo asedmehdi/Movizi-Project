@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movizi - Page Not Found</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-dark: #121212;
+            --imdb-light-dark: #2c2c2c;
+            --imdb-gray: #757575;
+            --imdb-light-gray: #e6e6e6;
+            --imdb-white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--imdb-dark);
+            color: var(--imdb-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navbar */
+        .navbar-1 {
+            background-color: var(--imdb-dark);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--imdb-light-dark);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-container-1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-1 {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+        
+        .menu-container-1 {
+            flex-grow: 1;
+        }
+        
+        .menu-list-1 {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu-list-item-1 {
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--imdb-white);
+        }
+        
+        .menu-list-item-1:hover {
+            color: var(--imdb-yellow);
+        }
+        
+        .menu-list-item-1.active {
+            color: var(--imdb-yellow);
+        }
+        
+        .profile-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-1 {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--imdb-light-dark);
+            border-radius: 10px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        
+        .toggle-icon {
+            position: absolute;
+            font-size: 12px;
+        }
+        
+        .fa-moon {
+            left: 5px;
+            top: 4px;
+            color: var(--imdb-yellow);
+        }
+        
+        .fa-sun {
+            right: 5px;
+            top: 4px;
+            color: var(--imdb-gray);
+        }
+        
+        .toggle-ball-1 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--imdb-white);
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            left: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        /* 404 Content */
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .error-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-icon {
+            font-size: 100px;
+            color: var(--imdb-yellow);
+            margin-bottom: 30px;
+        }
+        
+        .error-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--imdb-yellow);
+        }
+        
+        .error-message {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--imdb-gray);
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--imdb-yellow);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--imdb-gray);
+            color: var(--imdb-white);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--imdb-yellow);
+            color: var(--imdb-yellow);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 20px 40px;
+            background-color: var(--imdb-light-dark);
+            text-align: center;
+            font-size: 14px;
+            color: var(--imdb-gray);
+            border-top: 1px solid var(--imdb-dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-1 {
+                padding: 0 20px;
+            }
+            
+            .menu-list-item-1 {
+                display: none;
+            }
+            
+            .error-title {
+                font-size: 36px;
+            }
+            
+            .error-message {
+                font-size: 16px;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-1">
+        <div class="navbar-container-1">
+            <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
+            <div class="menu-container-1">
+                <ul class="menu-list-1">
+                    <li class="menu-list-item-1">Home</li>
+                    <li class="menu-list-item-1">Movies</li>
+                    <li class="menu-list-item-1">Series</li>
+                    <li class="menu-list-item-1">Popular</li>
+                    <li class="menu-list-item-1">Trends</li>
+                    <a href="./contactus.html"><li class="menu-list-item-1">Contact</li></a>
+                    <a href="./aboutus.html"><li class="menu-list-item-1">About</li></a>
+                    <a href="./blog.html"><li class="menu-list-item-1">Blog</li></a>
+                </ul>
+            </div>
+            <div class="profile-container">
+                <div class="profile-menu">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-avatar" width="32" height="32" style="border-radius:50%;">
+                </div>
+                <div class="toggle-1">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h1 class="error-title">404</h1>
+            <p class="error-message">
+                Oops! The page you're looking for doesn't exist or has been moved. 
+                You might have typed the wrong address or the page may have been removed.
+            </p>
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Go to Homepage
+                </a>
+                <a href="./contactus.html" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2023 Movizi. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const toggleBall = document.querySelector('.toggle-ball-1');
+        const toggle = document.querySelector('.toggle-1');
+        
+        document.body.classList.add('dark-mode');
+        toggleBall.style.transform = 'translateX(20px)';
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleBall.style.transform = 'translateX(20px)';
+                document.body.style.backgroundColor = '#121212';
+                document.body.style.color = 'white';
+            } else {
+                toggleBall.style.transform = 'translateX(0)';
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+    </script>
+</body>
+</html>
