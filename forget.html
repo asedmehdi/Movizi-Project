@@ -3,37 +3,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Website</title>
+    <title>Foreget Password | Movizi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style/style.css">
+    <style>
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-dark: #121212;
+            --imdb-light-dark: #2c2c2c;
+            --imdb-gray: #757575;
+            --imdb-light-gray: #e6e6e6;
+            --imdb-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--imdb-dark);
+            color: var(--imdb-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar-1 {
+            background-color: var(--imdb-dark);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--imdb-light-dark);
+            padding: 0 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container-1 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-1 {
+            color: var(--imdb-yellow);
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+        }
+
+        .menu-container-1 {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .menu-list-1 {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            white-space: nowrap;
+            padding-bottom: 5px;
+        }
+
+        .menu-list-1::-webkit-scrollbar {
+            display: none;
+        }
+
+        .menu-list-item-1 {
+            margin-right: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--imdb-white);
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-list-item-1:hover {
+            color: var(--imdb-yellow);
+            background-color: rgba(245, 197, 24, 0.1);
+        }
+
+        .menu-list-item-1.active {
+            color: var(--imdb-yellow);
+            background-color: rgba(245, 197, 24, 0.2);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--imdb-yellow);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--imdb-gray);
+            color: var(--imdb-white);
+        }
+
+        .toggle-1 {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background-color: var(--imdb-light-dark);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            position: absolute;
+            font-size: 12px;
+        }
+
+        .fa-moon {
+            left: 5px;
+            top: 4px;
+            color: var(--imdb-yellow);
+        }
+
+        .fa-sun {
+            right: 5px;
+            top: 4px;
+            color: var(--imdb-gray);
+        }
+
+        .toggle-ball-1 {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--imdb-white);
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Sidebar */
+        .sidebar-1 {
+            width: 60px;
+            height: calc(100vh - 60px);
+            background-color: var(--imdb-dark);
+            position: fixed;
+            top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            border-right: 1px solid var(--imdb-light-dark);
+        }
+
+        .left-menu-icon-1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--imdb-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .left-menu-icon-1:hover {
+            color: var(--imdb-yellow);
+        }
+
+        /* Register Form */
+        .register-container {
+            margin-left: 60px;
+            padding: 40px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-card {
+            background-color: var(--imdb-light-dark);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+        }
+
+        .register-title {
+            color: var(--imdb-yellow);
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--imdb-white);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--imdb-dark);
+            border: 1px solid var(--imdb-gray);
+            border-radius: 4px;
+            color: var(--imdb-white);
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--imdb-yellow);
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            margin-right: 10px;
+            accent-color: var(--imdb-yellow);
+        }
+
+        .form-check-label {
+            color: var(--imdb-light-gray);
+            font-size: 14px;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--imdb-yellow);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background-color: #e6b800;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--imdb-gray);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: var(--imdb-yellow);
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--imdb-light-dark);
+            color: var(--imdb-white);
+            padding: 40px;
+            margin-left: 60px;
+            border-top: 1px solid var(--imdb-gray);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            color: var(--imdb-yellow);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--imdb-light-gray);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--imdb-yellow);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--imdb-yellow);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--imdb-gray);
+            color: var(--imdb-gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-1 {
+                padding: 0 20px;
+            }
+
+            .menu-list-item-1 {
+                display: none;
+            }
+
+            .sidebar-1 {
+                display: none;
+            }
+
+            .register-container, footer {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .register-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="dark-mode">
     <div class="navbar-1">
         <div class="navbar-container-1">
             <div class="logo-container-1"><h1 class="logo-1">Movizi</h1></div>
             <div class="menu-container-1">
                 <ul class="menu-list-1">
-                    <li class="menu-list-item-1">Home</li>
-                    <li class="menu-list-item-1">Movies</li>
-                    <li class="menu-list-item-1">Series</li>
-                    <li class="menu-list-item-1">Popular</li>
-                    <li class="menu-list-item-1">Trends</li>
-                    <a href="./contactus.html"><li class="menu-list-item-1 active">Contact</li></a>
-                    <a href="./aboutus.html"><li class="menu-list-item-1 active">About</li></a>
-                    <a href="./blog.html"><li class="menu-list-item-1 active">Blog</li></a>
+                    <a href="index.html"><li class="menu-list-item-1">Menu</li></a>
+                    <a href="index.html"><li class="menu-list-item-1">Movies</li></a>
+                    <a href="./public&ContentPages/contactus.html"><li class="menu-list-item-1">Contact</li></a>
+                    <a href="./public&ContentPages/aboutus.html"><li class="menu-list-item-1">About</li></a>
+                    <a href="./blog.html"><li class="menu-list-item-1">Blog</li></a>
+		    <a href="./public&ContentPages/aboutus.html"><li class="menu-list-item-1">FAQ</li></a>
+                    <a href="./public&ContentPages/terms.html"><li class="menu-list-item-1">Terms</li></a>
+<a href="./public&ContentPages/privacy.html"><li class="menu-list-item-1">Privacy</li></a>
+
                 </ul>
             </div>
             <div class="profile-container">
                 <a href="./login.html">
                     <button type="button" class="btn btn-primary btn-sm">Login</button>
-                  </a>
-                  <a href="./register.html">
+                </a>
+                <a href="./register.html">
                     <button type="button" class="btn btn-secondary btn-sm">Register</button>
-                  </a>
+                </a>
                 <div class="toggle-1">
                     <i class="fas fa-moon toggle-icon"></i>
                     <i class="fas fa-sun toggle-icon"></i>
@@ -42,6 +408,7 @@
             </div>
         </div>
     </div>
+
     <div class="sidebar-1">
         <i class="left-menu-icon-1 fa-solid fa-house"></i>    
         <i class="left-menu-icon-1 fa-solid fa-magnifying-glass"></i>
@@ -52,32 +419,97 @@
         <i class="left-menu-icon-1 fa-solid fa-tv"></i>
     </div>
 
-    <!-- Bootstrap Login Form -->
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow">
-                    <div class="card-body p-4">
-                        <h2 class="text-center mb-4">Login to Movizi</h2>
-                        <form>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="remember">
-                                <label class="form-check-label" for="remember">Remember me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Submit</button>
-                        </form>
-                        <hr>
-                    </div>
+    <div class="register-container">
+        <div class="register-card">
+            <h2 class="register-title">Forget Password</h2>
+            <form>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                 </div>
-            </div>
+                <button type="submit" class="register-btn">Login</button>
+                <div class="login-link">
+                    Back previous <a href="./login.html">Back</a>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Movizi</h3>
+                <p>Your ultimate destination for movie reviews, ratings, and information.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Movies</a>
+                <a href="#">TV Shows</a>
+                <a href="#">Celebrities</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@movizi.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Movizi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const toggleBall = document.querySelector('.toggle-ball-1');
+        const toggle = document.querySelector('.toggle-1');
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                toggleBall.style.transform = 'translateX(20px)';
+                document.body.style.backgroundColor = '#121212';
+                document.body.style.color = 'white';
+            } else {
+                toggleBall.style.transform = 'translateX(0)';
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+
+        // Menu scroll functionality
+        const menuList = document.querySelector('.menu-list-1');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        menuList.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - menuList.offsetLeft;
+            scrollLeft = menuList.scrollLeft;
+        });
+
+        menuList.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        menuList.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        menuList.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - menuList.offsetLeft;
+            const walk = (x - startX) * 2;
+            menuList.scrollLeft = scrollLeft - walk;
+        });
+    </script>
 </body>
 </html>
